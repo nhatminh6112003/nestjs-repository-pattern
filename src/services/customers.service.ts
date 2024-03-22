@@ -3,11 +3,15 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { SupabaseService } from '../supabase/supabase.service';
+import { SupabaseService } from './supabase.service';
 import * as bcrypt from 'bcrypt';
+import { CustomersRepository } from 'src/repositories/customers.repository';
 @Injectable()
 export class CustomersService {
-  constructor(private supabaseService: SupabaseService) {}
+  constructor(
+    private supabaseService: SupabaseService,
+    private customersRepository: CustomersRepository,
+  ) {}
 
   async create(data: {
     username: string;
@@ -19,11 +23,8 @@ export class CustomersService {
     const hashPassword = await bcrypt.hash(data.password, saltOrRounds);
     const supabaseClient = this.supabaseService.getClient();
     const defaultPoint = 100;
-    const { data: existingUser, error: findError } = await supabaseClient
-      .from('customers')
-      .select('username')
-      .eq('username', data.username)
-      .single();
+    const { data: existingUser, error: findError } =
+      await this.customersRepository.findByUserName(data.username);
 
     if (existingUser) {
       throw new ConflictException('Username already exists');
@@ -60,5 +61,15 @@ export class CustomersService {
       return { message: 'Success!', user: userInfo, status: 200 };
     }
     return { message: 'Login failed', status: 401 };
+  }
+  async getByUserName(data: { username: string }) {
+    const supabaseClient = this.supabaseService.getClient();
+    const { data: user, error } = await supabaseClient
+      .from('customers')
+      .select('*')
+      .eq('username', data.username)
+      .single();
+    const { password, ...infoUser } = user;
+    return { message: 'Success', user: infoUser };
   }
 }

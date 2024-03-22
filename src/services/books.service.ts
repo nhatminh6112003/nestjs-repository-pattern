@@ -1,19 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { SupabaseService } from '../supabase/supabase.service';
-
+import { SupabaseService } from './supabase.service';
+import { BooksRepository } from 'src/repositories/books.repository';
 @Injectable()
 export class BooksService {
-  constructor(private supabaseService: SupabaseService) {}
+  constructor(
+    private supabaseService: SupabaseService,
+    private booksRepository: BooksRepository,
+  ) {}
 
   async searchByTitle(title: string) {
-    const supabaseClient = this.supabaseService.getClient();
-    let { data, error } = await supabaseClient
-      .from('books')
-      .select('*')
-      .ilike('title', `%${title}%`);
-
-    if (error) throw new Error(error.message);
-    return data;
+    return this.booksRepository.searchByTitle(title);
   }
 
   async create(bookData: {
@@ -23,23 +19,22 @@ export class BooksService {
     point: number;
     tag: string[];
   }) {
-    const supabaseClient = this.supabaseService.getClient();
-    let { data, error } = await supabaseClient.from('books').insert([bookData]);
+    const { data, error } = await this.booksRepository.create(bookData);
 
     if (error) throw new Error(error.message);
     return { message: 'Create book successfully!' };
   }
 
-  async getList(page: number, perPage: number) {
+  async getList(page: number, perPage: number, keyword?: string) {
     const supabaseClient = this.supabaseService.getClient();
 
-    // Tính offset dựa vào page và perPage
     const offset = (page - 1) * perPage;
 
     // Sử dụng limit (perPage) và offset để phân trang
     let { data, error, count } = await supabaseClient
       .from('books')
-      .select('*', { count: 'exact' }) // Lấy tổng số lượng để tính toán số trang
+      .select('*', { count: 'exact' })
+      .ilike('title', `%${keyword}%`)
       .range(offset, offset + perPage - 1);
 
     if (error) throw new Error(error.message);

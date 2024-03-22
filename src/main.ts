@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import helmet from 'helmet';
 import * as morgan from 'morgan';
 import { ValidationPipe } from '@nestjs/common';
-import { AppModule } from './modules/app/app.module';
+import { AppModule } from './modules/app.module';
 import { urlencoded, json } from 'express';
 import { useContainer } from 'class-validator';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';

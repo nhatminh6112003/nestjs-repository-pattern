@@ -10,13 +10,4 @@ export class CreateOrderDto {
   @ApiProperty()
   @IsNumber()
   amount: number;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  address: string;
-
-  @ApiProperty()
-  @IsString()
-  phone_number: string;
 }

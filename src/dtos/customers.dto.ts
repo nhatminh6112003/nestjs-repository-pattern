@@ -35,3 +35,10 @@ export class LoginCustomerDto {
   @IsNotEmpty()
   password: string;
 }
+
+export class UserNameDto {
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  username: string;
+}

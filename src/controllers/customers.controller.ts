@@ -1,7 +1,7 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import { CustomersService } from './customers.service';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { CustomersService } from '../services/customers.service';
 import { ApiTags, ApiResponse, ApiOperation } from '@nestjs/swagger';
-import { CreateCustomerDto, LoginCustomerDto } from './create-customers.dto';
+import { CreateCustomerDto, LoginCustomerDto, UserNameDto } from '../dtos/customers.dto';
 @ApiTags('customers')
 @Controller('customers')
 export class CustomersController {
@@ -28,5 +28,14 @@ export class CustomersController {
   @ApiResponse({ status: 401, description: 'Login failed.' })
   async login(@Body() loginCustomerDto: LoginCustomerDto) {
     return this.customersService.login(loginCustomerDto);
+  }
+  @Get('username')
+  @ApiOperation({ summary: 'Get by username' })
+  @ApiResponse({
+    status: 200,
+    description: ' successfully.',
+  })
+  async getByUserName(@Query() data: UserNameDto) {
+    return this.customersService.getByUserName(data);
   }
 }

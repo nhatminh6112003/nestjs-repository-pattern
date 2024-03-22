@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { BooksService } from './books.service';
+import { BooksService } from 'src/services/books.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CreateBookDto } from './books.dto';
-import { FindManyBooksQueryParams } from './types';
+import { CreateBookDto } from '../dtos/books.dto';
+import { FindManyBooksQueryParams } from '../types/types';
 
 @ApiTags('books')
 @Controller('books')
@@ -29,8 +29,9 @@ export class BooksController {
   async getList(@Query() param: FindManyBooksQueryParams) {
     const pageNumber = param?.page || 1;
     const perPageNumber = param?.perPage || 10;
+    const keyword = param?.keyword || '';
 
-    return this.booksService.getList(pageNumber, perPageNumber);
+    return this.booksService.getList(pageNumber, perPageNumber,keyword);
   }
 
   @Get('/search')
