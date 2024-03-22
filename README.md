@@ -85,5 +85,48 @@ The screenshot above provides a glimpse of the Swagger UI for our NestJS project
 
 For more details on using Swagger with NestJS, refer to the [NestJS Swagger documentation](https://docs.nestjs.com/openapi/introduction).
 
+## API Documentation
+
+This project uses Swagger for API documentation. Swagger provides an interactive UI where you can test out the different endpoints directly through the browser. Below are the available endpoints for managing customer data:
+
+### Customers
+
+- `POST /customers`
+  
+  Register a new customer. You need to provide customer details in the request body.
+
+- `GET /customers`
+  
+  List all customers. This endpoint retrieves a list of all registered customers.
+
+- `POST /customers/login`
+  
+  Log in a customer. This requires the customer's credentials in the request body.
+
+- `GET /customers/username`
+  
+  Retrieve a customer by their username. Replace `username` in the path with the actual username of the customer you want to retrieve.
+  
+### Orders
+
+- `POST /orders`: Create a new order.
+  - Body: Includes order details.
+- `GET /orders`: Retrieve a list of all orders.
+- `GET /orders/{id}`: Get a specific order by its ID.
+- `GET /orders/user/{id}`: Retrieve orders associated with a user ID.
+- `PUT /orders/cancel/{order_id}`: Cancel an order by providing the order ID.
+
+### Order Items
+
+- `POST /orderItem`: Create a new order item.
+  - Body: Includes item details linked to an order.
+- `GET /orderItem`: Retrieve a list of all order items.
+- `GET /orderItem/{id}`: Get a specific order item by its ID.
+
+### Books
+
+- `POST /books`: Create a new book entry.
+  - Body: Includes details of the book such as title, author, etc.
+- `GET /books`: Retrieve a list of all books.
 
 
