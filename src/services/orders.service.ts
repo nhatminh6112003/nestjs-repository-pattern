@@ -33,7 +33,7 @@ export class OrdersService {
     });
 
     if (error) throw new Error(error.message);
-    return { message: 'Create order successfully!', order_id: data[0]?.id };
+    return { message: 'Create order successfully!', order_id: data[0]?.id,status:200 };
   }
   async updatePoint(data: {
     user: {
