@@ -17,7 +17,7 @@ export class OrdersController {
   async createOrder(@Body() createOrderDto: CreateOrderDto) {
     return this.ordersService.create(createOrderDto);
   }
-  
+
   @Get(':id')
   @ApiOperation({ summary: 'Get an order by ID' })
   @ApiResponse({
@@ -28,5 +28,4 @@ export class OrdersController {
   async getOrderById(@Param('id') id: number) {
     return this.ordersService.getOrderById(id);
   }
-
 }

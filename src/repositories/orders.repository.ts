@@ -3,21 +3,12 @@ import { CreateCustomerDto } from 'src/dtos/customers.dto';
 import { SupabaseService } from 'src/services/supabase.service';
 
 @Injectable()
-export class CustomersRepository {
-  private table: string = 'customers';
+export class OrdersRepository {
+  private table = 'orders';
   constructor(private readonly supabaseService: SupabaseService) {}
 
   private get supabase() {
     return this.supabaseService.getClient();
-  }
-
-  public async findByUserName(username: string) {
-    const { data: existingUser, error: findError } = await this.supabase
-      .from(this.table)
-      .select('username')
-      .eq('username', username)
-      .single();
-    return { data: existingUser, error: findError };
   }
 
   public async findAll() {

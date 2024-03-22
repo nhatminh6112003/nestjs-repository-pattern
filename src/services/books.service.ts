@@ -31,7 +31,7 @@ export class BooksService {
     const offset = (page - 1) * perPage;
 
     // Sử dụng limit (perPage) và offset để phân trang
-    let { data, error, count } = await supabaseClient
+    const { data, error, count } = await supabaseClient
       .from('books')
       .select('*', { count: 'exact' })
       .ilike('title', `%${keyword}%`)

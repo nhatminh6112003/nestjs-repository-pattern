@@ -4,21 +4,22 @@ import { SupabaseService } from 'src/services/supabase.service';
 
 @Injectable()
 export class BooksRepository {
-  private table: string = 'books';
+  private table = 'books';
+
   constructor(private readonly supabaseService: SupabaseService) {}
 
   private get supabase() {
     return this.supabaseService.getClient();
   }
 
-  public async searchByTitle(title:string){
-    let { data, error } = await this.supabase
-    .from('books')
-    .select('*')
-    .ilike('title', `%${title}%`);
+  public async searchByTitle(title: string) {
+    const { data, error } = await this.supabase
+      .from('books')
+      .select('*')
+      .ilike('title', `%${title}%`);
 
-  if (error) throw new Error(error.message);
-  return data;
+    if (error) throw new Error(error.message);
+    return data;
   }
 
   public async findAll() {
@@ -52,7 +53,7 @@ export class BooksRepository {
       throw error;
     }
 
-    return { data, error } ;
+    return { data, error };
   }
 
   public async updateOne(id: number, updateUserDto: CreateBookDto) {

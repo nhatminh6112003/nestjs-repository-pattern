@@ -8,7 +8,6 @@ export class OrdersService {
   constructor(private supabaseService: SupabaseService) {}
 
   async create(bookData: CreateOrderDto) {
-    console.log('TCL: OrdersService -> create -> bookData', bookData);
     const supabaseClient = this.supabaseService.getClient();
 
     const statusSuccess = 1;
@@ -22,7 +21,7 @@ export class OrdersService {
     if (user?.point < bookData?.amount) {
       return { message: 'Not Enough Point', status: 400 };
     }
-    let { data, error } = await supabaseClient
+    const { data, error } = await supabaseClient
       .from('orders')
       .insert([{ ...bookData, status: statusSuccess }]);
     await this.updatePoint({
@@ -65,7 +64,7 @@ export class OrdersService {
   }
   async getList() {
     const supabaseClient = this.supabaseService.getClient();
-    let { data, error } = await supabaseClient.from('orders').select('*');
+    const { data, error } = await supabaseClient.from('orders').select('*');
 
     if (error) throw new Error(error.message);
     return { data, message: 'Success' };

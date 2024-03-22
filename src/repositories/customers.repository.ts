@@ -4,7 +4,7 @@ import { SupabaseService } from 'src/services/supabase.service';
 
 @Injectable()
 export class CustomersRepository {
-  private table: string = 'customers';
+  private table = 'customers';
   constructor(private readonly supabaseService: SupabaseService) {}
 
   private get supabase() {

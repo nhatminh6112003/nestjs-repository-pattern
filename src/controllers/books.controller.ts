@@ -31,7 +31,7 @@ export class BooksController {
     const perPageNumber = param?.perPage || 10;
     const keyword = param?.keyword || '';
 
-    return this.booksService.getList(pageNumber, perPageNumber,keyword);
+    return this.booksService.getList(pageNumber, perPageNumber, keyword);
   }
 
   @Get('/search')

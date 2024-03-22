@@ -10,7 +10,7 @@ export class Customers {
 
   @Column({ name: 'first_name' })
   first_name: string;
-  
+
   @Column({ name: 'password' })
   password: string;
 

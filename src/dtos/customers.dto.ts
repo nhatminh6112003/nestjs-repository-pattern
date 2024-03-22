@@ -2,7 +2,10 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsInt, IsString, Min, IsOptional, IsNotEmpty } from 'class-validator';
 
 export class CreateCustomerDto {
-  @ApiProperty({ example: 'john_doe', description: 'Unique username for the customer' })
+  @ApiProperty({
+    example: 'john_doe',
+    description: 'Unique username for the customer',
+  })
   @IsNotEmpty()
   @IsString()
   username: string;
@@ -29,7 +32,6 @@ export class LoginCustomerDto {
   @IsNotEmpty()
   username: string;
 
-  
   @ApiProperty()
   @IsString()
   @IsNotEmpty()

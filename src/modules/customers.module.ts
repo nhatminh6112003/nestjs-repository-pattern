@@ -7,6 +7,6 @@ import { CustomersRepository } from 'src/repositories/customers.repository';
 
 @Module({
   controllers: [CustomersController],
-  providers: [CustomersRepository,CustomersService, SupabaseService],
+  providers: [CustomersRepository, CustomersService, SupabaseService],
 })
 export class CustomersModule {}

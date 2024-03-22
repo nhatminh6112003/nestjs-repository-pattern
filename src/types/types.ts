@@ -7,7 +7,7 @@ export class FindManyBooksQueryParams {
   @IsOptional()
   @Type(() => Number)
   page: number;
-  
+
   @ApiProperty({ required: false })
   @IsString()
   keyword?: string;

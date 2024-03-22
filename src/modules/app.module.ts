@@ -10,7 +10,7 @@ import { OrdersModule } from './orders.module';
     CustomersModule,
     SupabaseModule,
     BooksModule,
-    OrdersModule
+    OrdersModule,
   ],
 })
 export class AppModule {}
