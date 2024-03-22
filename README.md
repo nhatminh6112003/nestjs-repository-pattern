@@ -58,6 +58,15 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## Environment Setup
+
+Set up your .env file. You can use the example.env file as reference:
+
+# API configuration
+PASSWORD=97sek1b38sgJFa7t
+SUPABASE_URL=https://bsyeolbodsjfwyswunsx.supabase.co
+SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJzeWVvbGJvZHNqZnd5c3d1bnN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA5NDM2NDAsImV4cCI6MjAyNjUxOTY0MH0.BzxTOgHPlJK1uA_3oYDB8Fo_hS9jiEH5Y8iFVVpO7gY
+
 ## Swagger Documentation for the NestJS Project
 
 This section provides details on the Swagger documentation integrated into our NestJS project. Swagger is an essential tool for designing, building, documenting, and consuming RESTful web services. It allows both developers and end-users to understand the capabilities of the service without accessing its source code.
