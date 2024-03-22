@@ -58,16 +58,23 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+## Swagger Documentation for the NestJS Project
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+This section provides details on the Swagger documentation integrated into our NestJS project. Swagger is an essential tool for designing, building, documenting, and consuming RESTful web services. It allows both developers and end-users to understand the capabilities of the service without accessing its source code.
 
-## Stay in touch
+### Accessing Swagger UI
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Our project is configured to serve the Swagger UI automatically. You can access the interactive API documentation by navigating to the following URL when your application is running:
 
-## License
+http://localhost:5000/api#/
 
-Nest is [MIT licensed](LICENSE).
+### Swagger UI Screenshot
+
+![Swagger UI](https://github.com/nhatminh6112003/nestjs-repository-pattern/assets/106549349/d0416285-76fc-45a9-b92b-17f57080d85e "Swagger UI in Action")
+
+The screenshot above provides a glimpse of the Swagger UI for our NestJS project. Through this interface, you can explore various API endpoints, their expected parameters, and the structure of response objects.
+
+For more details on using Swagger with NestJS, refer to the [NestJS Swagger documentation](https://docs.nestjs.com/openapi/introduction).
+
+
+
