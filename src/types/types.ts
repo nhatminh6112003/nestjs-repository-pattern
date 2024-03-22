@@ -10,6 +10,7 @@ export class FindManyBooksQueryParams {
 
   @ApiProperty({ required: false })
   @IsString()
+  @IsOptional()
   keyword?: string;
 
   @ApiProperty({ required: false })

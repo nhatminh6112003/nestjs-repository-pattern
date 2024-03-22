@@ -4,6 +4,7 @@ import { CustomersModule } from './customers.module';
 import { SupabaseModule } from './supabase.module';
 import { BooksModule } from './books.module';
 import { OrdersModule } from './orders.module';
+import { OrdersItemModule } from './order_item.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -11,6 +12,7 @@ import { OrdersModule } from './orders.module';
     SupabaseModule,
     BooksModule,
     OrdersModule,
+    OrdersItemModule,
   ],
 })
 export class AppModule {}

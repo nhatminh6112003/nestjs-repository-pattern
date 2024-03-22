@@ -33,11 +33,4 @@ export class BooksController {
 
     return this.booksService.getList(pageNumber, perPageNumber, keyword);
   }
-
-  @Get('/search')
-  @ApiOperation({ summary: 'Search books by title' })
-  @ApiResponse({ status: 200, description: 'Success' })
-  async searchByTitle(@Query('title') title: string) {
-    return this.booksService.searchByTitle(title);
-  }
 }

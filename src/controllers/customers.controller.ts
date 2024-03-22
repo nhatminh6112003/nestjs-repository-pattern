@@ -12,7 +12,7 @@ export class CustomersController {
   constructor(private readonly customersService: CustomersService) {}
 
   @Post()
-  @ApiOperation({ summary: 'Create a new customer' })
+  @ApiOperation({ summary: 'Register customer' })
   @ApiResponse({
     status: 201,
     description: 'Customer has been successfully created.',
@@ -20,6 +20,17 @@ export class CustomersController {
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async create(@Body() createCustomerDto: CreateCustomerDto) {
     return this.customersService.create(createCustomerDto);
+  }
+
+  @Get()
+  @ApiOperation({ summary: 'List customer' })
+  @ApiResponse({
+    status: 200,
+    description: 'Success',
+  })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
+  async getListCustomer() {
+    return this.customersService.getList();
   }
 
   @Post('login')

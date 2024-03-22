@@ -10,7 +10,7 @@ export class OrdersService {
   async create(bookData: CreateOrderDto) {
     const supabaseClient = this.supabaseService.getClient();
 
-    const statusSuccess = 1;
+    const statusPending = 1;
     const statusFailed = 3;
     const { data: user } = await supabaseClient
       .from('customers')
@@ -23,21 +23,24 @@ export class OrdersService {
     }
     const { data, error } = await supabaseClient
       .from('orders')
-      .insert([{ ...bookData, status: statusSuccess }]);
+      .insert([{ ...bookData, status: statusPending }])
+      .select();
+
     await this.updatePoint({
       user,
       totalPointBuy: bookData?.amount,
       username: user?.username,
     });
+
     if (error) throw new Error(error.message);
-    return { message: 'Create order successfully!' };
+    return { message: 'Create order successfully!', order_id: data[0]?.id };
   }
   async updatePoint(data: {
     user: {
       point: number;
     };
     totalPointBuy: number;
-    username: string;
+    username: number;
   }) {
     const supabaseClient = this.supabaseService.getClient();
 
@@ -51,7 +54,7 @@ export class OrdersService {
       .eq('username', data.username);
     return { message: 'Success' };
   }
-  async cancelOrder(orderId: string): Promise<any> {
+  async cancelOrder(orderId: number) {
     const statusCancel = 2;
     const { data, error } = await this.supabaseService
       .getClient()
@@ -75,8 +78,18 @@ export class OrdersService {
       .getClient()
       .from('orders')
       .select('*')
-      .eq('id', id)
-      .single();
+      .eq('id', id);
+
+    if (error) throw new Error(error.message);
+    return data;
+  }
+
+  async getOrderByUserId(id: number) {
+    const { data, error } = await this.supabaseService
+      .getClient()
+      .from('orders')
+      .select('*')
+      .eq('user_id', id);
 
     if (error) throw new Error(error.message);
     return data;

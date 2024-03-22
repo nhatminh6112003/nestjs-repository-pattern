@@ -1,27 +1,24 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCustomerDto } from 'src/dtos/customers.dto';
+import { CreateOrderItemDto } from 'src/dtos/order-item.dto';
 import { SupabaseService } from 'src/services/supabase.service';
 
 @Injectable()
-export class CustomersRepository {
-  private table = 'customers';
+export class OrderItemsRepository {
+  private table = 'orderItem';
   constructor(private readonly supabaseService: SupabaseService) {}
 
   private get supabase() {
     return this.supabaseService.getClient();
   }
 
-  public async findByUserName(username: string) {
-    const { data: existingUser, error: findError } = await this.supabase
-      .from(this.table)
-      .select('username')
-      .eq('username', username)
-      .single();
-    return { data: existingUser, error: findError };
-  }
-
   public async findAll() {
-    const { data, error } = await this.supabase.from(this.table).select('*');
+    const { data, error } = await this.supabase.from(this.table).select(`
+    product_id,
+    order_id,
+    books (
+      *
+    )
+  `);
 
     if (error) {
       throw error;
@@ -44,10 +41,10 @@ export class CustomersRepository {
     return data;
   }
 
-  public async create(customerData: CreateCustomerDto) {
+  public async create(orderItemData: CreateOrderItemDto) {
     const { data, error } = await this.supabase
       .from(this.table)
-      .insert([customerData]);
+      .insert([orderItemData]);
 
     if (error) {
       throw error;
@@ -56,7 +53,7 @@ export class CustomersRepository {
     return { data, error };
   }
 
-  public async updateOne(id: number, updateData: CreateCustomerDto) {
+  public async updateOne(id: number, updateData: CreateOrderItemDto) {
     const { data, error } = await this.supabase
       .from(this.table)
       .update(updateData)

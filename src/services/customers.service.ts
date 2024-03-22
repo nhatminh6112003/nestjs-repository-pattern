@@ -72,4 +72,12 @@ export class CustomersService {
     const { password, ...infoUser } = user;
     return { message: 'Success', user: infoUser };
   }
+
+  async getList() {
+    const { data, error } = await this.customersRepository.findAll();
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
+  }
 }
